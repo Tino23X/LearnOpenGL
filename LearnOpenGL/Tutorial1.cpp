@@ -1,7 +1,12 @@
 #include "gl.h"
 
+const unsigned int SCR_WIDTH = 800;
+const unsigned int SCR_HEIGHT = 600;
+
 //当窗口大小改变时的回调函数
 void frameBufferSizeCallback(GLFWwindow *window, int width, int height);
+//输入指令检测
+void processInput(GLFWwindow *window);
 
 int main()
 {
@@ -15,7 +20,7 @@ int main()
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	//--Create window
-	GLFWwindow *window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
+	GLFWwindow *window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "LearnOpenGL", NULL, NULL);
 	if (window == NULL)
 	{
 		std::cout << "Failed to create GLFW window" << std::endl;
@@ -24,7 +29,10 @@ int main()
 	}
 	glfwMakeContextCurrent(window);
 
-	//--Init GLAD
+	//注册回调函数
+	glfwSetFramebufferSizeCallback(window, frameBufferSizeCallback);
+
+	//--Init GLAD load all opengl function pointers
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
 		std::cout << "Failed to initialize GLAD" << std::endl;
@@ -32,16 +40,23 @@ int main()
 	}
 
 	//--Set viewport
-	glViewport(-500, -700, 800, 600);
-
-	//注册回调函数
-	glfwSetFramebufferSizeCallback(window, frameBufferSizeCallback);
+	glViewport(0, 0, 300, 300);
 
 
-	//--Set Render loop
+	//--Render loop
 	while (!glfwWindowShouldClose(window))
 	{
+		//Input Test
+		processInput(window);
+
+		//Render instruction
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+
+
 		glfwSwapBuffers(window);
+
+		//Cheak event
 		glfwPollEvents();
 	}
 
@@ -56,4 +71,12 @@ void frameBufferSizeCallback(GLFWwindow * window, int width, int height)
 {
 	glViewport(0, 0, width, height);
 
+}
+
+void processInput(GLFWwindow * window)
+{
+	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+	{
+		glfwSetWindowShouldClose(window, true);
+	}
 }
