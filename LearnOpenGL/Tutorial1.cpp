@@ -1,4 +1,5 @@
 #include "gl.h"
+#include "HelloTriangle.h"
 
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
@@ -7,6 +8,12 @@ const unsigned int SCR_HEIGHT = 600;
 void frameBufferSizeCallback(GLFWwindow *window, int width, int height);
 // ‰»Î÷∏¡ÓºÏ≤‚
 void processInput(GLFWwindow *window);
+
+//shader conduct
+int CreatShader(GLenum shaderType, const GLchar *const *shaderSource);
+void CheckShaderError(int shader);
+int CreatShaderProgram(int vertexShader, int fragmentShader);
+void CheckShaderLinkError(int shaderProgram);
 
 int main()
 {
@@ -78,5 +85,49 @@ void processInput(GLFWwindow * window)
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 	{
 		glfwSetWindowShouldClose(window, true);
+	}
+}
+
+int CreatShader(GLenum shaderType, const GLchar *const *shaderSource)
+{
+	int shader = glCreateShader(shaderType);
+	glShaderSource(shader, 1, shaderSource, NULL);
+	glCompileShader(shader);
+	CheckShaderError(shader);
+	return shader;
+}
+
+void CheckShaderError(int shader)
+{
+	int success = 0; 
+	char infoLog[512];
+	glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+	if (!success)
+	{
+		glGetShaderInfoLog(shader, 512, NULL, infoLog);
+		std::cout << "ERROR: shader compilation failed" << infoLog << std::endl;
+	}
+}
+
+int CreatShaderProgram(int vertexShader, int fragmentShader)
+{
+	int shaderProgram = glCreateProgram();
+	glAttachShader(shaderProgram, vertexShader);
+	glAttachShader(shaderProgram, fragmentShader);
+	glLinkProgram(shaderProgram);
+	CheckShaderLinkError(shaderProgram);
+	return shaderProgram;
+}
+
+
+void CheckShaderLinkError(int shaderProgram)
+{
+	int success = 0; 
+	char infoLog[512];
+	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
+	if (!success)
+	{
+		glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
+		std::cout << "ERROR: shader link failed" << infoLog << std::endl;
 	}
 }

@@ -18,6 +18,9 @@
     <ClInclude Include="gl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="HelloTriangle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tutorial1.cpp">
