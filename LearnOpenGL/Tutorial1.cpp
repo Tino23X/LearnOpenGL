@@ -14,12 +14,12 @@ int CreatShader(GLenum shaderType, const GLchar *const *shaderSource);
 void CheckShaderError(int shader);
 int CreatShaderProgram(int vertexShader, int fragmentShader);
 void CheckShaderLinkError(int shaderProgram);
+void GetVAO(unsigned int &VAO, unsigned int &VBO, unsigned int &EBO);
 
 int main()
 {
 	//--Init GLFW
 	glfwInit();
-
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 
@@ -46,8 +46,11 @@ int main()
 		return -1;
 	}
 
-	//--Set viewport
-	glViewport(0, 0, 300, 300);
+	int vertexShader = CreatShader(GL_VERTEX_SHADER, &vertexShaderSource);
+	int fragmentShader = CreatShader(GL_FRAGMENT_SHADER, &fragmentShaderSource);
+	int shaderProgram = CreatShaderProgram(vertexShader, fragmentShader);
+	unsigned int VAO, VBO, EBO;
+	GetVAO(VAO, VBO, EBO);
 
 
 	//--Render loop
@@ -60,12 +63,21 @@ int main()
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
+		glUseProgram(shaderProgram);
+		glBindVertexArray(VAO);
+
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
 
 		glfwSwapBuffers(window);
 
 		//Cheak event
 		glfwPollEvents();
 	}
+
+	glDeleteVertexArrays(1, &VAO);
+	glDeleteBuffers(1, &VBO);
+	glDeleteBuffers(1, &EBO);
 
 	//终止函数
 	glfwTerminate();
@@ -116,6 +128,11 @@ int CreatShaderProgram(int vertexShader, int fragmentShader)
 	glAttachShader(shaderProgram, fragmentShader);
 	glLinkProgram(shaderProgram);
 	CheckShaderLinkError(shaderProgram);
+
+	//Delete shader
+	glDeleteShader(vertexShader);
+	glDeleteShader(fragmentShader);
+
 	return shaderProgram;
 }
 
@@ -131,3 +148,33 @@ void CheckShaderLinkError(int shaderProgram)
 		std::cout << "ERROR: shader link failed" << infoLog << std::endl;
 	}
 }
+
+
+void GetVAO(unsigned int &VAO, unsigned int &VBO, unsigned int &EBO)
+{
+
+	//creat buffers
+	glGenBuffers(1, &VBO);
+	glGenBuffers(1, &EBO);
+	glGenVertexArrays(1, &VAO);
+
+	//bind buffers
+	glBindVertexArray(VAO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+
+	//Copy data
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+
+	//以顶点属性位置值作为参数，启用顶点属性。
+	glEnableVertexAttribArray(0);
+
+	//解绑
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
+	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+}
+
