@@ -16,7 +16,7 @@ int CreatShaderProgram(int vertexShader, int fragmentShader);
 void CheckShaderLinkError(int shaderProgram);
 void GetVAO(unsigned int &VAO, unsigned int &VBO, unsigned int &EBO);
 
-int main()
+int Main()
 {
 	//--Init GLFW
 	glfwInit();
@@ -100,26 +100,6 @@ void processInput(GLFWwindow * window)
 	}
 }
 
-int CreatShader(GLenum shaderType, const GLchar *const *shaderSource)
-{
-	int shader = glCreateShader(shaderType);
-	glShaderSource(shader, 1, shaderSource, NULL);
-	glCompileShader(shader);
-	CheckShaderError(shader);
-	return shader;
-}
-
-void CheckShaderError(int shader)
-{
-	int success = 0; 
-	char infoLog[512];
-	glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
-	if (!success)
-	{
-		glGetShaderInfoLog(shader, 512, NULL, infoLog);
-		std::cout << "ERROR: shader compilation failed" << infoLog << std::endl;
-	}
-}
 
 int CreatShaderProgram(int vertexShader, int fragmentShader)
 {
