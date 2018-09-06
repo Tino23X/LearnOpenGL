@@ -5,7 +5,6 @@
 #include "HelloTriangle.h"
 
 
-
 const char *vertexShaderSource = "#version 330 core\n"
 	"layout (location = 0) in vec3 aPos;\n"
 	"void main()\n"
@@ -21,7 +20,7 @@ const char *fragmentShaderSource = "#version 330 core\n"
 	"}\n\0";
 
 
-float vertices[] = {
+float vers[] = {
      0.5f,  0.5f, 0.0f,  // top right
      0.5f, -0.5f, 0.0f,  // bottom right
     -0.5f, -0.5f, 0.0f,  // bottom left
@@ -30,10 +29,11 @@ float vertices[] = {
 
 
 //法线问题，三角形要逆时针构成
-int indices[] = {
+int inds[] = {
 	0, 1, 3, //第一个三角形
 	1, 2, 3 //第二个三角形
 };
+
 
 
 void RenderFuntion(GLuint shaderProgram, GLuint VAO)
@@ -70,7 +70,7 @@ int main()
 
 	const auto shaderProgram = GetShaderProgram(&vertexShaderSource, &fragmentShaderSource);
 	GLuint VAO, VBO, EBO;
-	GetVAO(VAO, VBO, EBO, vertices, indices);
+	GetVAO(VAO, VBO, EBO, vers, sizeof(vers), inds, sizeof(inds));
 	
 	WindowLoop(window, WindowClearColorSet, RenderFuntion, InputProcess, shaderProgram, VAO);
 
