@@ -1,8 +1,13 @@
+// 
+// 2018090615:57
+// 2018090516:40
+// 
+
 #include "shader_extend.h"
 
 void CheckShaderError(const int shader)
 {
-	int success = 0; 
+	int success = 0;
 	char infoLog[512];
 	//检查编译是否成功
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
@@ -14,7 +19,7 @@ void CheckShaderError(const int shader)
 }
 
 
-GLuint CreatShader(GLenum shaderType, const GLchar *const *shaderSource)
+GLuint CreatShader(GLenum shaderType, const GLchar*const * shaderSource)
 {
 	const auto shader = glCreateShader(shaderType);
 	glShaderSource(shader, 1, shaderSource, nullptr);
@@ -26,12 +31,12 @@ GLuint CreatShader(GLenum shaderType, const GLchar *const *shaderSource)
 
 void CheckShaderLinkError(int shaderProgram)
 {
-	int success = 0; 
+	int success = 0;
 	char infoLog[512];
 	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
 	if (!success)
 	{
-		glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
+		glGetProgramInfoLog(shaderProgram, 512, nullptr, infoLog);
 		std::cout << "ERROR: shader link failed" << infoLog << std::endl;
 	}
 }
@@ -51,7 +56,7 @@ GLuint CreatShaderProgram(int vertexShader, int fragmentShader)
 	return shaderProgram;
 }
 
-GLuint GetShaderProgram(const GLchar *const *vertexShaderSource, const GLchar *const *fragmentShaderSource)
+GLuint GetShaderProgram(const GLchar*const * vertexShaderSource, const GLchar*const * fragmentShaderSource)
 {
 	const auto vertexShader = CreatShader(GL_VERTEX_SHADER, vertexShaderSource);
 	const auto fragmentShader = CreatShader(GL_FRAGMENT_SHADER, fragmentShaderSource);

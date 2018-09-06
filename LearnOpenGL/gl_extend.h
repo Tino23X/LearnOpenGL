@@ -1,3 +1,8 @@
+// 
+// 2018090615:57
+// 2018090514:50
+// 
+
 #pragma once
 
 struct Color3
@@ -24,7 +29,6 @@ inline Color4 GetColor4(const float r, const float g, const float b, const float
 	color.a = a;
 
 	return color;
-
 }
 
 inline Color3 GetColor3(const float r, const float g, const float b)
@@ -35,5 +39,4 @@ inline Color3 GetColor3(const float r, const float g, const float b)
 	color.b = b;
 
 	return color;
-
 }

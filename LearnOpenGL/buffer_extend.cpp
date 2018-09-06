@@ -1,9 +1,14 @@
+// 
+// 2018090615:57
+// 2018090614:42
+// 
+
 #include "buffer_extend.h"
 
 
-void GetVAO(GLuint &VAO, GLuint &VBO, GLuint &EBO, const void *vertices, const GLint verticesLength, const void *indices, GLuint indicesLength)
+void GetVAO(GLuint& VAO, GLuint& VBO, GLuint& EBO, const void* vertices, const GLint verticesLength,
+            const void* indices, GLuint indicesLength)
 {
-
 	//creat buffers
 	glGenBuffers(1, &VBO);
 	glGenBuffers(1, &EBO);
@@ -27,5 +32,4 @@ void GetVAO(GLuint &VAO, GLuint &VBO, GLuint &EBO, const void *vertices, const G
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
 }

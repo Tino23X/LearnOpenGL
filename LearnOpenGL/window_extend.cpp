@@ -1,9 +1,9 @@
 // 
-// 2018090514:11
+// 2018090615:57
 // 2018090510:43
 // 
 
-#include "window.h"
+#include "window_extend.h"
 
 void GLFWInit(const int major, int minor)
 {
@@ -58,10 +58,10 @@ GLFWwindow* GLWindowInit()
 }
 
 
-
-void WindowLoop(GLFWwindow* window, BackGroundSetFunciton backgroundFunction, RenderFunciton renderFunciton, InputCheckFunciton inputCheckFunction, GLuint shaderProgram, GLuint VAO)
+void WindowLoop(GLFWwindow* window, BackGroundSetFunciton backgroundFunction, RenderFunciton renderFunciton,
+                InputCheckFunciton inputCheckFunction, GLuint shaderProgram, GLuint VAO)
 {
-	while(!glfwWindowShouldClose(window))
+	while (!glfwWindowShouldClose(window))
 	{
 		inputCheckFunction(window);
 
