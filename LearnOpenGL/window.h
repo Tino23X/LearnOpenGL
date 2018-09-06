@@ -1,15 +1,15 @@
 // 
-// 2018090514:11
+// 2018090611:19
 // 2018090511:27
 // 
 
 #pragma once
 
 #include "gl.h"
-#include "gl_extend.h"
 
-typedef void(*RenderFunciton)();
-typedef void(*InputCheckFunciton)(GLFWwindow*);
+typedef void (*RenderFunciton)(GLuint shaderProgram, GLuint VAO);
+typedef void (*InputCheckFunciton)(GLFWwindow*);
+typedef void (*BackGroundSetFunciton)();
 
 
 const unsigned int WINDOW_WIDTH = 800;
@@ -24,11 +24,5 @@ const unsigned int GL_MINOR = 3;
  */
 GLFWwindow* GLWindowInit();
 
-/**
- * \brief Window Graph render loop
- * \param window 
- * \param color 
- * \param renderFunciton
- * \param inputCheckFunction 
- */
-void WindowLoop(GLFWwindow* window, Color4 color, RenderFunciton renderFunciton, InputCheckFunciton inputCheckFunction);
+void WindowLoop(GLFWwindow* window, BackGroundSetFunciton backgroundFunction, RenderFunciton renderFunciton,
+                InputCheckFunciton inputCheckFunction, GLuint shaderProgram, GLuint VAO);

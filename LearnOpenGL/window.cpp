@@ -58,23 +58,16 @@ GLFWwindow* GLWindowInit()
 }
 
 
-void WindowClearColorSet(Color4 color)
-{
-	glClearColor(color.r, color.g, color.b, color.a);
-	glClear(GL_COLOR_BUFFER_BIT);
 
-}
-
-
-void WindowLoop(GLFWwindow* window, Color4 color, RenderFunciton renderFunciton, InputCheckFunciton inputCheckFunction)
+void WindowLoop(GLFWwindow* window, BackGroundSetFunciton backgroundFunction, RenderFunciton renderFunciton, InputCheckFunciton inputCheckFunction, GLuint shaderProgram, GLuint VAO)
 {
 	while(!glfwWindowShouldClose(window))
 	{
 		inputCheckFunction(window);
 
-		WindowClearColorSet(color);
+		backgroundFunction();
 
-		renderFunciton();
+		renderFunciton(shaderProgram, VAO);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();

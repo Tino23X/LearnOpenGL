@@ -1,5 +1,6 @@
 #include "gl.h"
 #include "HelloTriangle.h"
+/*
 
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
@@ -10,11 +11,11 @@ void frameBufferSizeCallback(GLFWwindow *window, int width, int height);
 void processInput(GLFWwindow *window);
 
 //shader conduct
-int CreatShader(GLenum shaderType, const GLchar *const *shaderSource);
+GLuint CreatShader(GLenum shaderType, const GLchar *const *shaderSource);
 void CheckShaderError(int shader);
-int CreatShaderProgram(int vertexShader, int fragmentShader);
+GLuint CreatShaderProgram(int vertexShader, int fragmentShader);
 void CheckShaderLinkError(int shaderProgram);
-void GetVAO(unsigned int &VAO, unsigned int &VBO, unsigned int &EBO);
+void GetVAO(GLuint &VAO, GLuint &VBO, GLuint &EBO, const void *vertices, const void *indices);
 
 int Main()
 {
@@ -48,9 +49,9 @@ int Main()
 
 	int vertexShader = CreatShader(GL_VERTEX_SHADER, &vertexShaderSource);
 	int fragmentShader = CreatShader(GL_FRAGMENT_SHADER, &fragmentShaderSource);
-	int shaderProgram = CreatShaderProgram(vertexShader, fragmentShader);
+	const int shaderProgram = CreatShaderProgram(vertexShader, fragmentShader);
 	unsigned int VAO, VBO, EBO;
-	GetVAO(VAO, VBO, EBO);
+	GetVAO(VAO, VBO, EBO, vertices, indices);
 
 
 	//--Render loop
@@ -101,60 +102,5 @@ void processInput(GLFWwindow * window)
 }
 
 
-int CreatShaderProgram(int vertexShader, int fragmentShader)
-{
-	int shaderProgram = glCreateProgram();
-	glAttachShader(shaderProgram, vertexShader);
-	glAttachShader(shaderProgram, fragmentShader);
-	glLinkProgram(shaderProgram);
-	CheckShaderLinkError(shaderProgram);
 
-	//Delete shader
-	glDeleteShader(vertexShader);
-	glDeleteShader(fragmentShader);
-
-	return shaderProgram;
-}
-
-
-void CheckShaderLinkError(int shaderProgram)
-{
-	int success = 0; 
-	char infoLog[512];
-	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
-	if (!success)
-	{
-		glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
-		std::cout << "ERROR: shader link failed" << infoLog << std::endl;
-	}
-}
-
-
-void GetVAO(unsigned int &VAO, unsigned int &VBO, unsigned int &EBO)
-{
-
-	//creat buffers
-	glGenBuffers(1, &VBO);
-	glGenBuffers(1, &EBO);
-	glGenVertexArrays(1, &VAO);
-
-	//bind buffers
-	glBindVertexArray(VAO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-
-	//Copy data
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-
-	//以顶点属性位置值作为参数，启用顶点属性。
-	glEnableVertexAttribArray(0);
-
-	//解绑
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
-	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-}
-
+*/

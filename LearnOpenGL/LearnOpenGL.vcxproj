@@ -121,6 +121,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="buffer_extend.h" />
     <ClInclude Include="gl.h" />
     <ClInclude Include="gl_extend.h" />
     <ClInclude Include="HelloTriangle.h" />
@@ -128,11 +129,11 @@
     <ClInclude Include="window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="buffer_extend.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="shader_extend.cpp" />
     <ClCompile Include="window.cpp" />
     <ClCompile Include="glad.c" />
-    <ClCompile Include="Tutorial1.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
