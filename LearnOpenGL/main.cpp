@@ -30,9 +30,9 @@ int inds[] = {
 void UniformVariableTest(GLuint shaderProgram)
 {
 	const float timeValue = glfwGetTime();
-	const float greenValue = (sin(timeValue) * 0.5f) + 0.5f;
-	const int outColor = glGetUniformLocation(shaderProgram, "outColor");
-	glUniform4f(outColor, 0.0f, greenValue, 0.0f, 1.0f);
+	const float offersetValue = (sin(timeValue) * 0.5f) + 0.5f;
+	const int outColor = glGetUniformLocation(shaderProgram, "outPosx");
+	glUniform1f(outColor, offersetValue);
 	
 }
 
