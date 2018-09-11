@@ -33,13 +33,13 @@
     <ClInclude Include="window_extend.h">
       <Filter>Header Files\Extend</Filter>
     </ClInclude>
-    <ClInclude Include="shader_extend.h">
-      <Filter>Header Files\Extend</Filter>
-    </ClInclude>
     <ClInclude Include="gl_extend.h">
       <Filter>Header Files\Extend</Filter>
     </ClInclude>
     <ClInclude Include="buffer_extend.h">
+      <Filter>Header Files\Extend</Filter>
+    </ClInclude>
+    <ClInclude Include="GLSLShader.h">
       <Filter>Header Files\Extend</Filter>
     </ClInclude>
   </ItemGroup>
@@ -53,10 +53,10 @@
     <ClCompile Include="window_extend.cpp">
       <Filter>Source Files\Extend</Filter>
     </ClCompile>
-    <ClCompile Include="shader_extend.cpp">
+    <ClCompile Include="buffer_extend.cpp">
       <Filter>Source Files\Extend</Filter>
     </ClCompile>
-    <ClCompile Include="buffer_extend.cpp">
+    <ClCompile Include="GLSLShader.cpp">
       <Filter>Source Files\Extend</Filter>
     </ClCompile>
   </ItemGroup>

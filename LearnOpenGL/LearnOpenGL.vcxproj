@@ -123,14 +123,14 @@
   <ItemGroup>
     <ClInclude Include="buffer_extend.h" />
     <ClInclude Include="gl.h" />
+    <ClInclude Include="GLSLShader.h" />
     <ClInclude Include="gl_extend.h" />
-    <ClInclude Include="shader_extend.h" />
     <ClInclude Include="window_extend.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="buffer_extend.cpp" />
+    <ClCompile Include="GLSLShader.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="shader_extend.cpp" />
     <ClCompile Include="window_extend.cpp" />
     <ClCompile Include="glad.c" />
   </ItemGroup>

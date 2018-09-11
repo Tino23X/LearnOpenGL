@@ -4,29 +4,9 @@
 // 
 
 #include "window_extend.h"
-#include "shader_extend.h"
 #include "buffer_extend.h"
 #include "gl_extend.h"
-
-
-const char* vertexShaderSource = "#version 330 core\n"
-	"layout (location = 0) in vec3 aPos;\n"
-	"layout (location = 1) in vec3 aColor;\n"
-	"out vec4 vectorColor;"
-	"void main()\n"
-	"{\n"
-	"	gl_Position = vec4(aPos, 1.0);\n"
-	"   vectorColor = vec4(aColor, 1.0);\n"
-	"}\0";
-
-const char* fragmentShaderSource = "#version 330 core\n"
-	"out vec4 fragColor;\n"
-	"in vec4 vectorColor;"
-	"uniform vec4 outColor;"
-	"void main()\n"
-	"{\n"
-	"	fragColor = vectorColor;"
-	"}\n\0";
+#include "GLSLShader.h"
 
 
 float vers[] = {
@@ -85,8 +65,8 @@ void WindowClearColorSet()
 int main()
 {
 	GLFWwindow* window = GLWindowInit();
-
-	const auto shaderProgram = GetShaderProgram(&vertexShaderSource, &fragmentShaderSource);
+	GLSLShader* shader = new GLSLShader("shader/VertexShader.glsl", "shader/FragmentShader.glsl");
+	const auto shaderProgram = shader->ID;
 	GLuint VAO, VBO, EBO;
 	GetVAO(VAO, VBO, EBO, vers, sizeof(vers), inds, sizeof(inds));
 
