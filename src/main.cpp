@@ -5,7 +5,7 @@
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
-void framebuffer_size_callback(GLFWwindow *window, int width, int height) { glViewport(0, 0, width, height); }
+void framebufferSizeCallback(GLFWwindow *window, int width, int height) { glViewport(0, 0, width, height); }
 
 void processInput(GLFWwindow *window)
 {
@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
     }
 
     glfwMakeContextCurrent(window);
-    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    glfwSetFramebufferSizeCallback(window, framebufferSizeCallback);
 
     // init GLAD
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
