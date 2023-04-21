@@ -3,7 +3,7 @@ add_rules("mode.debug", "mode.release")
 target("LearnOpenGl")
 set_kind("binary")
 add_files("src/*.cpp", "src/*.c")
-add_links("glfw", "GLU", "GL", "Xrandr", "Xxf86vm", "Xi", "Xinerama", "X11", "rt", "dl")
+add_links("glfw", "GL")
 
 --
 -- If you want to known more usage about xmake, please see https://xmake.io
